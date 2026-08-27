@@ -47,7 +47,7 @@ static class TileLocationExtensions
 
 public sealed partial class Plugin : IStellarPlugin
 {
-    public string Name => "RaidPortalHelper";
+    public string Name => "S3P3RaidPortalHelper";
     private const string ClashSceneIds = "13021";
     private const string BrutalSceneIds = "13022";
     private const string PurgeSceneIds = "13023";

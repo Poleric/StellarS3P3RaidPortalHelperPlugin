@@ -5,8 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
         <LangVersion>latest</LangVersion>
-        <RootNamespace>Stellar.RaidPortalHelper</RootNamespace>
-        <PackageId>Stellar.RaidPortalHelper</PackageId>
+        <RootNamespace>Stellar.S3P3RaidPortalHelper</RootNamespace>
+        <PackageId>Stellar.S3P3RaidPortalHelper</PackageId>
         <Version>1.1.0</Version>
     </PropertyGroup>
 

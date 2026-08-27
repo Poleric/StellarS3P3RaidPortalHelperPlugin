@@ -28,7 +28,7 @@ public sealed partial class Plugin
                         BuildTile(TileLocation.BottomRight),
                     ])
             ]),
-        Else: new TextElement(() => "Raid boss 3 not loaded."),
+        Else: new TextElement(() => "S3 Raid not loaded."),
         Fill: true
     );
 

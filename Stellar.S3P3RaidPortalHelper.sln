@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stellar.RaidPortalHelper", "Stellar.RaidPortalHelper.csproj", "{ED5FEB52-8BD2-4468-B701-9A5931D8A601}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stellar.S3P3RaidPortalHelper", "Stellar.S3P3RaidPortalHelper.csproj", "{ED5FEB52-8BD2-4468-B701-9A5931D8A601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

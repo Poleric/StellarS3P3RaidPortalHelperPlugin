@@ -57,6 +57,7 @@ public sealed partial class Plugin : IStellarPlugin
     private const int BuffId3 = 829374;
     private const int BuffId4 = 829375;
 
+    private TileLocation? _currentLocation;
     private Dictionary<TileLocation, int> _portals = new();
 
     private readonly IPluginServices _services;
@@ -85,37 +86,22 @@ public sealed partial class Plugin : IStellarPlugin
                 Resizable = true,
                 MinWidth = 150f, MinHeight = 100f
             },
-            new ConditionalElement(
-                // TODO: check for ScenePosId as well
-                When: () => services.ClientState.CurrentSceneName is ClashSceneIds or BrutalSceneIds or PurgeSceneIds,
-                // TODO: display on current tile
-                Then: new ColumnElement(
-                    Gap: 16f,
-                    Children:
-                    [
-                        new RowElement(
-                            Gap: 8f,
-                            Children:
-                            [
-                                BuildTile(TileLocation.TopLeft),
-                                BuildTile(TileLocation.Top),
-                                BuildTile(TileLocation.TopRight),
-                            ]),
-                        new RowElement(
-                            Gap: 8f,
-                            Children:
-                            [
-                                BuildTile(TileLocation.BottomLeft),
-                                BuildTile(TileLocation.Bottom),
-                                BuildTile(TileLocation.BottomRight),
-                            ])
-                    ]),
-                Else: new TextElement(() => "Raid boss 3 not loaded."),
-                Fill: true
-            )
+            BuildRoot()
         ));
 
+        services.Framework.Update += OnUpdate;
         services.CombatEvents.CombatEventOccurred += OnCombatEvent;
+    }
+
+    private void OnUpdate(float deltaTime)
+    {
+        if (_services.PlayerState.IsAvailable)
+        {
+            return;
+        }
+
+        var pos = _services.PlayerState.Position;
+        _currentLocation = TileLocationExtensions.GetNearestTileLocation(new PointF(pos.X, pos.Z));
     }
 
     private void OnCombatEvent(CombatEvent combatEvent)
@@ -188,6 +174,7 @@ public sealed partial class Plugin : IStellarPlugin
 
     public void Dispose()
     {
+        _services.Framework.Update -= OnUpdate;
         _services.CombatEvents.CombatEventOccurred -= OnCombatEvent;
         _hud.Remove();
     }

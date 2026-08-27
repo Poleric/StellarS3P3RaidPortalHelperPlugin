@@ -7,7 +7,6 @@ public sealed partial class Plugin
     private HudElement BuildRoot() => new ConditionalElement(
         // TODO: check for ScenePosId as well
         When: () => _services.ClientState.CurrentSceneName is ClashSceneIds or BrutalSceneIds or PurgeSceneIds,
-        // TODO: display on current tile
         Then: new ColumnElement(
             Gap: 16f,
             Children:
@@ -37,7 +36,15 @@ public sealed partial class Plugin
         Weight: 1f,
         Child: Expand(new PanelElement(
             Expand(new TextElement(
-                () => _portals.TryGetValue(tileLocation, out var order) ? order.ToString() : "",
+                () =>
+                {
+                    var text = "";
+                    if (_currentLocation == tileLocation)
+                        text += ">";
+                    if (_portals.TryGetValue(tileLocation, out var order))
+                        text += order.ToString();
+                    return text;
+                },
                 Emphasis: true,
                 Shadow: true,
                 FontSize: 36,
